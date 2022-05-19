@@ -8,9 +8,6 @@ const getAllarticles = async (req, res) => {
 
 const getArticle = async (req, res) => {
   const articleID = req.params.id;
-  //const articleFound = await articlesData.filter(
-  //  (article) => article.id === articleID
-  //);
   const article = await ArticleModel.findOne({ _id: articleID });
   res
     .status(StatusCodes.OK)
@@ -22,7 +19,7 @@ const postArticle = async (req, res) => {
   await ArticleModel.create(req.body);
 
   res
-    .status(StatusCodes.OK)
+    .status(StatusCodes.CREATED)
     .json({ name: name, title: title, msg: 'posted the article' });
 };
 
