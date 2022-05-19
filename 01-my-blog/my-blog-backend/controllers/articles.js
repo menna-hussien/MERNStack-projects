@@ -31,17 +31,51 @@ const postArticle = async (req, res) => {
 
 const updateArticle = async (req, res, next) => {
   const articleID = req.params.id;
-  const article = await ArticleModel.findOneAndUpdate(
-    { _id: articleID },
-    req.body,
-    {
-      new: true,
-      runValidators: true,
-    }
-  );
+  let article = undefined;
+  if (req.body.comments) {
+    article = await ArticleModel.findOneAndUpdate(
+      { _id: articleID },
+      {
+        $push: {
+          comments: req.body.comments,
+        },
+      }
+    );
+  } else if (req.body.likesNum) {
+    article = await ArticleModel.findOneAndUpdate(
+      { _id: articleID },
+      {
+        $inc: {
+          likesNum: 1,
+        },
+      }
+    );
+  } else if (req.body.dislikesNum) {
+    article = await ArticleModel.findOneAndUpdate(
+      { _id: articleID },
+      {
+        $inc: {
+          dislikesNum: 1,
+        },
+      }
+    );
+  } else {
+    article = await ArticleModel.findOneAndUpdate(
+      { _id: articleID },
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+  }
+
+  ///check if article is available
   if (!article) {
     return next(CustomError(`Article with id: ${articleID} not found`, 404));
   }
+
+  ///retrun the response
   res
     .status(StatusCodes.OK)
     .json({ article, msg: 'updated the article', numOfHits: article.length });

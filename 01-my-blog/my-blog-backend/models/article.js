@@ -20,7 +20,7 @@ const articleSchema = new mongoose.Schema({
     default: 0,
   },
   comments: {
-    type: Array,
+    type: [{ type: Object }],
     default: [],
   },
   postedAt: {
