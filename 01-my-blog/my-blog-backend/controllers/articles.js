@@ -39,6 +39,9 @@ const updateArticle = async (req, res, next) => {
         $push: {
           comments: req.body.comments,
         },
+      },
+      {
+        new: true,
       }
     );
   } else if (req.body.likesNum) {
@@ -48,6 +51,9 @@ const updateArticle = async (req, res, next) => {
         $inc: {
           likesNum: 1,
         },
+      },
+      {
+        new: true,
       }
     );
   } else if (req.body.dislikesNum) {
@@ -57,6 +63,9 @@ const updateArticle = async (req, res, next) => {
         $inc: {
           dislikesNum: 1,
         },
+      },
+      {
+        new: true,
       }
     );
   } else {

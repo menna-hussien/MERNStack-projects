@@ -7,7 +7,9 @@ const connectDB = require('./db/connect');
 const articlesRoute = require('./routes/articles');
 const notFound = require('./middleware/notFound');
 const errorHandler = require('./middleware/error-handler');
+const path = require('path');
 
+app.use(express.static(path.join(__dirname, '/build')));
 //middleware layers
 app.use(express.json());
 
@@ -18,8 +20,12 @@ app.use('/api/articles', articlesRoute);
 app.use(notFound);
 app.use(errorHandler);
 
+//
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + 'build/index.html'));
+});
 //db and server connection..simply we have to wait for db connection first before listening in the server port
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 
 const start = async () => {
   try {

@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 const ArticlesList = ({ articles }) => {
   return (
     <>
-      {articles.map((articleInfo, key) => {
-        const { id, title, content } = articleInfo;
+      {articles.map((articleInfo, index) => {
+        const { _id: id, title, content } = articleInfo;
         return (
-          <article>
-            <Link className='article-list-item' to={`/article/${id}`} key={key}>
+          <article key={index}>
+            <Link className='article-list-item' to={`/article/${id}`}>
               <h2>{title}</h2>
               <p>{content[0].substring(0, 150)}...</p>
             </Link>

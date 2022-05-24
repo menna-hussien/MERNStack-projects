@@ -11,6 +11,7 @@ const {
 
 router.route('/').post(postArticle).get(getAllarticles);
 
+//router.route('/:id/upvote').patch(updateArticle);
 router.route('/:id').get(getArticle).delete(deleteArticle).patch(updateArticle);
 
 module.exports = router;
