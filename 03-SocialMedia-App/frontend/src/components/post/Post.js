@@ -2,36 +2,39 @@ import React from 'react';
 import { MoreVert } from '@mui/icons-material';
 import Paper from '@mui/material/Paper';
 import './post.css';
-const Post = () => {
+import { Users } from '../../dummyData';
+
+const Post = ({ post }) => {
+  const user = Users.filter((u) => u.id === post.userId);
   return (
     <Paper className='post' elevation={2}>
       <div className='postWrapper'>
         <div className='postTop'>
           <div className='postTopLeft'>
             <img
-              src='/assests/people/1.jpeg'
+              src={user[0].profilePicture}
               alt='noimage'
               className='postProfileImg'
             />
-            <span className='postUsername'>Menna Hussien</span>
-            <span className='postDate'>5 mins ago</span>
+            <span className='postUsername'>{user[0].username}</span>
+            <span className='postDate'>{post.date}</span>
           </div>
           <div className='postTopRight'>
             <MoreVert />
           </div>
         </div>
         <div className='postCenter'>
-          <span className='postText'>Hey it'smy first post :)</span>
-          <img src='/assests/ad.png' alt='noimage' className='postImg' />
+          <span className='postText'>{post?.desc}</span>
+          <img src={post.photo} alt='noimage' className='postImg' />
         </div>
         <div className='postButtom'>
           <div className='postButtomLeft'>
             <img className='likeIcon' src='/assests/like.png' alt='noimage' />
             <img className='likeIcon' src='/assests/heart.png' alt='noimage' />
-            <span className='postLikeCounter'>5 people like it</span>
+            <span className='postLikeCounter'>{post.like} people like it</span>
           </div>
           <div className='postButtomRight'>
-            <span className='postCommentText'>9 comments</span>
+            <span className='postCommentText'>{post.comment} comments</span>
           </div>
         </div>
       </div>

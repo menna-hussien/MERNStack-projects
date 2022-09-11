@@ -19,8 +19,8 @@
 }
 
 .postProfileImg {
-  width: 32px;
-  height: 32px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -37,10 +37,30 @@
 
 .postButtom {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
+}
+.postButtomLeft {
+  display: flex;
+  align-items: center;
 }
 
+.likeIcon {
+  margin-right: 5px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.postLikeCounter {
+  font-size: 15px;
+}
+
+.postCommentText {
+  cursor: pointer;
+  border-bottom: 1px dashed gray;
+  font-size: 15px;
+}
 .postCenter {
   display: flex;
   flex-direction: column;
